@@ -1,7 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -11,6 +8,11 @@ namespace ordered_jobs_web_api.Controllers
     [Route("api/[controller]")]
     public class TestController : Controller
     {
+        IMongoClient client;
+        public TestController(IMongoClient mongoClient)
+        {
+            client = mongoClient;
+        }
         // GET api/test
         [HttpGet]
         public IEnumerable<string> Get()
@@ -29,7 +31,6 @@ namespace ordered_jobs_web_api.Controllers
         [HttpPost]
         public void Post([FromBody]TestCase value)
         {
-            IMongoClient client = new MongoClient();
             var database = client.GetDatabase("orderedjobs");
             var collection = database.GetCollection<TestCase>("testcases");
             collection.InsertOneAsync(value);
@@ -45,7 +46,6 @@ namespace ordered_jobs_web_api.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            IMongoClient client = new MongoClient();
             var database = client.GetDatabase("orderedjobstests");
             var collection = database.GetCollection<TestCase>("testcases");
             var filter = new BsonDocument();

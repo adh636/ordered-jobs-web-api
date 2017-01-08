@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ordered_jobs_web_api.Controllers
@@ -18,7 +14,7 @@ namespace ordered_jobs_web_api.Controllers
             return welcomeMessage;
         }
 
-        // GET api/orderedjobs/5
+        // GET api/orderedjobs/a-|b-c|c-
         [HttpGet("{unorderedJobs}")]
         public string Get(string unorderedJobs)
         {

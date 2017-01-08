@@ -16,8 +16,13 @@
     "Microsoft.Extensions.Logging.Console": "1.1.0",
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-    "MongoDB.Driver": "2.4.0"
+    "Microsoft.DotNet.InternalAbstractions": "1.0.0",
+    "MongoDB.Driver": "2.4.0",
+    "NUnit": "3.5.0",
+    "dotnet-test-nunit": "3.4.0-beta-3",
+    "Moq": "4.6.38-alpha"
   },
+  "testRunner": "nunit",
 
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final"

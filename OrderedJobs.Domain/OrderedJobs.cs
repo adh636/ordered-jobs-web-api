@@ -8,7 +8,7 @@ public class OrderedJobs {
     private IEnumerable<string> independentJobs;
     private IEnumerable<string> dependentJobs;
 
-    public string order(string jobs) {
+    virtual public string order(string jobs) {
         if (jobs == "") return "";
         splitAndFilterJobs(jobs);
         orderJobs();
@@ -30,7 +30,7 @@ public class OrderedJobs {
     }
 
     private void checkForSelfDependency() {
-        foreach (string job in jobArr) {
+        foreach (string job in dependentJobs) {
             if (jobDependsOnItself(job)) {
                 orderedJobs = "jobs can't depend on themselves";
             }
