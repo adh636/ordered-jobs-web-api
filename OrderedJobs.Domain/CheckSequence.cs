@@ -4,6 +4,9 @@ using System.Linq;
 public class CheckSequence {
     private IEnumerable<string> dependentJobs;
     public string GetResult(string testCase, string orderedTestCase) {
+        if (testCase.Split('|').Length != orderedTestCase.Length) {
+            return "Fail with " + orderedTestCase + ", expected length to be " + testCase.Split('|').Length;
+        }
         FilterDependentJobs(testCase);
         foreach (var job in dependentJobs) {
             if (orderedTestCase.IndexOf(job[0]) < orderedTestCase.IndexOf(job[2])) {

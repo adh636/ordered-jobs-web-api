@@ -1,4 +1,5 @@
 using System.Net.Http;
+using System.Threading.Tasks;
 
 public class TestCasePermutationResult {
     public string testCase {get; set;}
@@ -9,10 +10,14 @@ public class TestCasePermutationResult {
         GetResult(url);
     }
 
-    public async void GetResult(string url) {
+    public void GetResult(string url) {
+        string orderedJob = GetExternalJobOrder(url).Result;
+        result = new CheckSequence().GetResult(testCase, orderedJob);
+    }
+
+    public async Task<string> GetExternalJobOrder(string url) {
         TestCaseHttpClient testCaseHttpClient = new TestCaseHttpClient();
         HttpResponseMessage response = await testCaseHttpClient.GetAsync(url + "/" + testCase);
-        string orderedJob = await response.Content.ReadAsStringAsync();
-        result = new CheckSequence().GetResult(testCase, orderedJob);
+        return await response.Content.ReadAsStringAsync();
     }
 }

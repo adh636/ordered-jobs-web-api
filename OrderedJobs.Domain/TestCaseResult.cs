@@ -9,13 +9,9 @@ public class TestCaseResult {
         this.testCase = testCase.testCase;
         List<string> testCasePermutations = new AllPermutations().GetPermutations(this.testCase, '|');
         foreach (string testCasePermutation in testCasePermutations) {
-            AddTestCasePermutationResult(testCasePermutation, url);
+            permutationResults.Add(new TestCasePermutationResult(testCasePermutation, url));
         }
         result = GetResult();
-    }
-
-    public void AddTestCasePermutationResult(string testCasePermutation, string url) {
-        permutationResults.Add(new TestCasePermutationResult(testCasePermutation, url));
     }
 
     public string GetResult() {

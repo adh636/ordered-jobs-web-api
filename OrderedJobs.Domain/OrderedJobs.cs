@@ -8,7 +8,7 @@ public class OrderedJobs {
     private IEnumerable<string> independentJobs;
     private IEnumerable<string> dependentJobs;
 
-    virtual public string order(string jobs) {
+    public string order(string jobs) {
         if (jobs == "") return "";
         splitAndFilterJobs(jobs);
         orderJobs();
