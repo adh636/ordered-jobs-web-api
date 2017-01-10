@@ -4,9 +4,9 @@ public class OrderedJobsResult {
     public List<TestCaseResult> testCaseResults = new List<TestCaseResult>();
     public string result {get; set;}
 
-    public OrderedJobsResult(List<TestCase> testCases) {
+    public OrderedJobsResult(List<TestCase> testCases, string url) {
         foreach (TestCase testCase in testCases) {
-            testCaseResults.Add(new TestCaseResult(testCase));
+            testCaseResults.Add(new TestCaseResult(testCase, url));
         }
         result = GetResult();
     }

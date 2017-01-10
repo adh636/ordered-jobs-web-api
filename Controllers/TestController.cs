@@ -10,55 +10,62 @@ namespace ordered_jobs_web_api.Controllers
     public class TestController : Controller
     {
         IMongoClient client;
+        IMongoDatabase database;
+        IMongoCollection<TestCase> collection;
+
         public TestController(IMongoClient mongoClient)
         {
             client = mongoClient;
+            database = client.GetDatabase("orderedjobs");
+            collection = database.GetCollection<TestCase>("testcases");
         }
-        
+
+        // // GET api/test
+        // [HttpGet]
+        // public async Task<OrderedJobsResult> Get([FromBody]TestCase value)
+        // {
+        //     List<TestCase> testCases = new List<TestCase>();
+        //     await collection.Find(new BsonDocument()).ForEachAsync(X => {
+        //         testCases.Add(X);
+        //     });
+        //     return new OrderedJobsResult(testCases);
+        // }
+
         // GET api/test
         [HttpGet]
         public async Task<OrderedJobsResult> Get()
         {
-            var database = client.GetDatabase("orderedjobs");
-            var collection = database.GetCollection<TestCase>("testcases");
             List<TestCase> testCases = new List<TestCase>();
             await collection.Find(new BsonDocument()).ForEachAsync(X => {
                 testCases.Add(X);
             });
-            return new OrderedJobsResult(testCases);
-        }
-
-        // GET api/test/5
-        [HttpGet("{value}")]
-        public string Get(string value)
-        {
-            
-            return value;
+            return new OrderedJobsResult(testCases, "http://localhost:5000/api/orderedjobs");
         }
 
         // POST api/test
         [HttpPost]
         public void Post([FromBody]TestCase value)
         {
-            var database = client.GetDatabase("orderedjobs");
-            var collection = database.GetCollection<TestCase>("testcases");
             collection.InsertOneAsync(value);
         }
 
         // PUT api/test/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public OrderedJobsResult Put(int id, [FromBody]string url)
         {
+            List<TestCase> testCases = new List<TestCase>();
+            collection.Find(new BsonDocument()).ForEachAsync(X => {
+                testCases.Add(X);
+            });
+            return new OrderedJobsResult(testCases, url);
         }
 
         // DELETE api/test/5~
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var database = client.GetDatabase("orderedjobs");
-            var collection = database.GetCollection<TestCase>("testcases");
             var filter = new BsonDocument();
-            var result = collection.DeleteManyAsync(filter);
+            collection.DeleteManyAsync(filter);
         }
     }
 }

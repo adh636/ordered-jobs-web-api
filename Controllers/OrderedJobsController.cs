@@ -5,12 +5,12 @@ namespace ordered_jobs_web_api.Controllers
     [Route("api/[controller]")]
     public class OrderedJobsController : Controller
     {
+        string welcomeMessage = "Welcome to the Ordered Jobs Web API!  add /{jobs you want ordered} to the url to get your jobs in the right order";
+        
         // GET api/orderedjobs
         [HttpGet]
         public string Get()
         {
-            string welcomeMessage = "Welcome to the Ordered Jobs Web API! "  
-             + "add /{jobs you want ordered} to the url to get your jobs in the right order";
             return welcomeMessage;
         }
 
