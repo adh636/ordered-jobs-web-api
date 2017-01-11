@@ -7,17 +7,11 @@ public class TestCasePermutationResult {
 
     public TestCasePermutationResult(string testCase, string url) {
         this.testCase = testCase;
-        GetResult(url);
+        result = GetResult(url);
     }
 
-    public void GetResult(string url) {
-        string orderedJob = GetExternalJobOrder(url).Result;
-        result = new CheckSequence().GetResult(testCase, orderedJob);
-    }
-
-    public async Task<string> GetExternalJobOrder(string url) {
-        TestCaseHttpClient testCaseHttpClient = new TestCaseHttpClient();
-        HttpResponseMessage response = await testCaseHttpClient.GetAsync(url + "/" + testCase);
-        return await response.Content.ReadAsStringAsync();
+    public string GetResult(string url) {
+        string orderedJob = new ExternalOrderedJobs().GetResult(testCase, url);
+        return new CheckSequence().GetResult(testCase, orderedJob);
     }
 }

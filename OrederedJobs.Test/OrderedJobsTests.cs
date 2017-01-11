@@ -4,20 +4,20 @@ using Moq;
 [TestFixture]
 public class OrderedJobsTests {
     OrderedJobs oj;
-    Mock<OrderedJobs> mock;
+    // Mock<OrderedJobs> mock;
     
     [SetUp]
 	public void InitializeOrderedJobsClass()
 	{
 	    oj = new OrderedJobs();
-        mock = new Mock<OrderedJobs>();
-        mock.Setup(oj => oj.order(It.IsAny<string>())).Returns("testMock");
+        // mock = new Mock<OrderedJobs>();
+        // mock.Setup(oj => oj.order(It.IsAny<string>())).Returns("testMock");
 	}
     
-    [Test]
-    public void MockOrderedJobs() {
-        Assert.That(mock.Object.order("dsafsadfsa"), Is.EqualTo("testMock"));
-    }
+    // [Test]
+    // public void MockOrderedJobs() {
+    //     Assert.That(mock.Object.order("dsafsadfsa"), Is.EqualTo("testMock"));
+    // }
 
     [Test]
     public void NoJobs() {

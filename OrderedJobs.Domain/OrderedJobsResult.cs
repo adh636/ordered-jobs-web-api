@@ -5,10 +5,14 @@ public class OrderedJobsResult {
     public string result {get; set;}
 
     public OrderedJobsResult(List<TestCase> testCases, string url) {
+        AddTestCaseResults(testCases, url);
+        result = GetResult();
+    }
+
+    public void AddTestCaseResults(List<TestCase> testCases, string url) {
         foreach (TestCase testCase in testCases) {
             testCaseResults.Add(new TestCaseResult(testCase, url));
         }
-        result = GetResult();
     }
 
     public string GetResult() {
