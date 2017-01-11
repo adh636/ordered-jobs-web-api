@@ -7,11 +7,11 @@ public class TestCaseResult {
 
     public TestCaseResult(TestCase testCase, string url) {
         this.testCase = testCase.testCase;
-        GetAndAddPermutationResults(url);
+        AddPermutationResults(url);
         result = GetResult();
     }
 
-    public void GetAndAddPermutationResults(string url) {
+    public void AddPermutationResults(string url) {
         List<string> testCasePermutations = new AllPermutations().GetPermutations(testCase, '|');
         foreach (string testCasePermutation in testCasePermutations) {
             permutationResults.Add(new TestCasePermutationResult(testCasePermutation, url));
