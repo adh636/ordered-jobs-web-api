@@ -20,17 +20,6 @@ namespace ordered_jobs_web_api.Controllers
             collection = database.GetCollection<TestCase>("testcases");
         }
 
-        // // GET api/test
-        // [HttpGet]
-        // public async Task<OrderedJobsResult> Get([FromBody]TestCase value)
-        // {
-        //     List<TestCase> testCases = new List<TestCase>();
-        //     await collection.Find(new BsonDocument()).ForEachAsync(X => {
-        //         testCases.Add(X);
-        //     });
-        //     return new OrderedJobsResult(testCases);
-        // }
-
         // GET api/test
         [HttpGet]
         public async Task<OrderedJobsResult> Get()

@@ -1,6 +1,3 @@
-using System.Net.Http;
-using System.Threading.Tasks;
-
 public class TestCasePermutationResult {
     public string testCase {get; set;}
     public string result {get; set;}
