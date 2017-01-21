@@ -17,7 +17,7 @@ public class OrderedJobsEndToEnd {
     public async Task NoTestCases() {
         var expected = "{\"testCaseResults\":[],\"result\":\"PASS\"}";
         
-        await httpClient.DeleteAsync("http://localhost:5000/api/test/5");
+        await httpClient.DeleteAsync("http://localhost:5000/api/test");
         
         var response = await httpClient.GetAsync("http://localhost:5000/api/test"); 
         var result = await response.Content.ReadAsStringAsync();
@@ -36,12 +36,12 @@ public class OrderedJobsEndToEnd {
             testCase = "a-|b-"
         };
         
-        await httpClient.DeleteAsync("http://localhost:5000/api/test/5");
+        await httpClient.DeleteAsync("http://localhost:5000/api/test");
         await httpClient.PostAsJsonAsync("http://localhost:5000/api/test", testCase);
 
-        var response = await httpClient.GetAsync("http://localhost:5000/api/test"); 
+        var response = await httpClient.GetAsync("http://localhost:5000/api/test?url=http://localhost:5000/api/orderedJobs"); 
         var result = await response.Content.ReadAsStringAsync();
 
-        Assert.That(expected, Is.EqualTo(result));
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

@@ -4,14 +4,14 @@ public class OrderedJobsResult {
     public List<TestCaseResult> testCaseResults = new List<TestCaseResult>();
     public string result {get; set;}
 
-    public OrderedJobsResult(List<TestCase> testCases, string url) {
-        AddTestCaseResults(testCases, url);
+    public OrderedJobsResult(IEnumerable<TestCase> testCases, string url, IHttpClient iHttpClient) {
+        AddTestCaseResults(testCases, url, iHttpClient);
         result = GetResult();
     }
 
-    public void AddTestCaseResults(List<TestCase> testCases, string url) {
+    public void AddTestCaseResults(IEnumerable<TestCase> testCases, string url, IHttpClient iHttpClient) {
         foreach (TestCase testCase in testCases) {
-            testCaseResults.Add(new TestCaseResult(testCase, url));
+            testCaseResults.Add(new TestCaseResult(testCase, url, iHttpClient));
         }
     }
 

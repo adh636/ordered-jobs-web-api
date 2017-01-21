@@ -37,6 +37,27 @@ public class CheckSequenceTests {
         string orderedTestCase = "cba";
         Assert.That(cs.GetResult(testCase, orderedTestCase), Is.EqualTo("PASS"));
     }
+
+    [Test]
+    public void MultipleJobsWrongLength() {
+        string testCase = "a-|b-|c-";
+        string orderedTestCase = "cbaa";
+        Assert.That(cs.GetResult(testCase, orderedTestCase), Is.EqualTo("FAIL with cbaa, expected length of 3"));
+    }
+
+    [Test]
+    public void ResultContainsWrongJob() {
+        string testCase = "a-|b-|c-";
+        string orderedTestCase = "abd";
+        Assert.That(cs.GetResult(testCase, orderedTestCase), Is.EqualTo("FAIL with abd, expected not to see d"));
+    }
+
+    [Test]
+    public void ResultContainsJobMoreThanOnce() {
+        string testCase = "a-|b-|c-";
+        string orderedTestCase = "aba";
+        Assert.That(cs.GetResult(testCase, orderedTestCase), Is.EqualTo("FAIL with aba, expected not to see duplicate jobs"));
+    }
         
     [TestCase]
     public void MultipleJobsOneDependency() {

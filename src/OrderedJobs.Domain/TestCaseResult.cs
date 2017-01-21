@@ -5,16 +5,16 @@ public class TestCaseResult {
     public string testCase {get; set;}
     public string result {get; set;}
 
-    public TestCaseResult(TestCase testCase, string url) {
+    public TestCaseResult(TestCase testCase, string url, IHttpClient iHttpClient) {
         this.testCase = testCase.testCase;
-        AddPermutationResults(url);
+        AddPermutationResults(url, iHttpClient);
         result = GetResult();
     }
 
-    public void AddPermutationResults(string url) {
+    public void AddPermutationResults(string url, IHttpClient iHttpClient) {
         List<string> testCasePermutations = new AllPermutations().GetPermutations(testCase, '|');
         foreach (string testCasePermutation in testCasePermutations) {
-            permutationResults.Add(new TestCasePermutationResult(testCasePermutation, url));
+            permutationResults.Add(new TestCasePermutationResult(testCasePermutation, url, iHttpClient));
         }
     }
 
