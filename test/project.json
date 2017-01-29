@@ -21,7 +21,8 @@
     "dotnet-test-nunit": "3.4.0-beta-3",
     "Moq": "4.6.38-alpha",
     "OrderedJobs.Domain": "1.0.0",
-    "OrderedJobs.Web": "1.0.0"
+    "OrderedJobs.Web": "1.0.0",
+    "OrderedJobs.Data": "1.0.0"
   },
   "testRunner": "nunit",
 
