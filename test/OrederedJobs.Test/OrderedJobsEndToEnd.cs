@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -6,6 +7,7 @@ using NUnit.Framework;
 public class OrderedJobsEndToEnd {
 
     HttpClient httpClient;
+    String url = "http://localhost:5000/api/test";
     
     [SetUp]
 	public void InitializeOrderedJobsClass()
@@ -17,9 +19,9 @@ public class OrderedJobsEndToEnd {
     public async Task NoTestCases() {
         var expected = "{\"testCaseResults\":[],\"result\":\"PASS\"}";
         
-        await httpClient.DeleteAsync("http://localhost:5000/api/test");
+        await httpClient.DeleteAsync(url);
         
-        var response = await httpClient.GetAsync("http://localhost:5000/api/test"); 
+        var response = await httpClient.GetAsync(url); 
         var result = await response.Content.ReadAsStringAsync();
 
         Assert.That(expected, Is.EqualTo(result));
@@ -36,10 +38,10 @@ public class OrderedJobsEndToEnd {
             testCase = "a-|b-"
         };
         
-        await httpClient.DeleteAsync("http://localhost:5000/api/test");
-        await httpClient.PostAsJsonAsync("http://localhost:5000/api/test", testCase);
+        await httpClient.DeleteAsync(url);
+        await httpClient.PostAsJsonAsync(url, testCase);
 
-        var response = await httpClient.GetAsync("http://localhost:5000/api/test?url=http://localhost:5000/api/orderedJobs"); 
+        var response = await httpClient.GetAsync(url + "?url=http://localhost:5000/api/orderedJobs"); 
         var result = await response.Content.ReadAsStringAsync();
 
         Assert.That(result, Is.EqualTo(expected));

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class TestCaseHelper {
@@ -13,5 +14,15 @@ public class TestCaseHelper {
     {
         IEnumerable<TestCase> testCases = dataAccess.GetAllTestCases();
         return new OrderedJobsResult(testCases, url, iHttpClient);
+    }
+
+    internal void InsertTestCase(TestCase testCase)
+    {
+        dataAccess.InsertOneTestCase(testCase);
+    }
+
+    internal void DeleteAllTestCases()
+    {
+        dataAccess.DeleteAllTestCases();
     }
 }
